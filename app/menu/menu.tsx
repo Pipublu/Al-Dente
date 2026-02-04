@@ -1,6 +1,8 @@
-
+import { useNavigate } from "react-router";
 
 export default function Menu() {
+  let navigate = useNavigate();
+
   const exit = () => {
     console.log("Exiting...");
   };
@@ -11,6 +13,7 @@ export default function Menu() {
 
   const timer = () => {
     console.log("To set timer...");
+    navigate("/timer");
   };
   return <>
     <div className="centered vbox">

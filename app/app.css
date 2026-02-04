@@ -20,6 +20,17 @@ button:hover {
   border: 0.25rem solid var(--vibrant-blue);
 }
 
+button, .icon {
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 3rem;
+  font-family: var(--title-font);
+  margin: 1rem;
+}
+
+
 .centered {
   display: flex;
   justify-content: center;
@@ -27,10 +38,36 @@ button:hover {
   text-align: center;
 }
 
+.circle {
+  display: flex;
+  border-radius: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.circle-centre {
+  background-color: rgb(255, 255, 255);
+  width: 12rem;
+  height: 12rem;
+}
+
+.fill {
+  margin: 1rem;
+  background-color: rgb(96, 162, 105);
+  width: 13rem;
+  height: 13rem;
+}
+
 .title {
   font-size: 4rem;
   font-family: var(--title-font);
   margin: 2rem;
+}
+
+.timer {
+  font-size: 4rem;
+  font-family: var(--title-font);
 }
 
 .menu-button {
@@ -41,7 +78,22 @@ button:hover {
   border-color: var(--contrast);
 }
 
+.icon:hover {
+  transform: scale(1.2);
+  color: var(--vibrant-blue);
+}
+
+.hbox {
+  display: flex;
+  flex-direction: row;
+}
+
 .vbox {
   display: flex;
   flex-direction: column;
+}
+
+.spacer {
+  display: flex;
+  width: 10rem;
 }
