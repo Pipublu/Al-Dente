@@ -3,8 +3,8 @@ import Menu from "../menu/menu";
 
 export function meta({}: Route.MetaArgs) {
   return [
-    { title: "New React Router App" },
-    { name: "description", content: "Welcome to React Router!" },
+    { title: "Al dente" },
+    { name: "description", content: "Welcome to Al dente!" },
   ];
 }
 

@@ -1,0 +1,14 @@
+FONTS USED IN AL-DENTE
+=====================
+
+Rock Salt
+---------
+Source: Google Fonts (https://fonts.google.com/specimen/Rock+Salt)
+License: SIL Open Font License, Version 1.1
+URL: https://openfontlicense.org
+Copyright: The Delicious Handrawn Project Authors (https://github.com/alphArtype/Delicious-Handrawn)
+
+This font is free to use in personal and commercial projects.
+Attribution is appreciated but not required.
+
+For more details, see: https://openfontlicense.org

@@ -14,9 +14,9 @@ app.on("ready", () => {
 
   app.isPackaged
     ? mainWindow.loadFile(path.join(__dirname, "index.html")) // Prod
-    : (mainWindow.loadURL("http://localhost:5173"), // Dev
-      mainWindow.webContents.openDevTools()); // Open dev tools
-});
+    : (mainWindow.loadURL("http://localhost:5173") // Dev
+      //,mainWindow.webContents.openDevTools(); // Open dev tools
+)});
 
 // Listen for close app from renderer
 ipcMain.on("close-app", () => {

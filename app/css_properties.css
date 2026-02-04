@@ -1,0 +1,13 @@
+:root {
+  --main-bg-color: rgb(238, 230, 198);
+
+  --secondary-bg: rgb(208, 193, 166);
+
+  --contrast: rgb(68, 41, 30);
+
+  --vibrant-blue: rgb(11, 107, 225);
+
+  --title-font: "Delicious Handrawn", cursive;
+
+  --standard-font: "Arial", "Helvetica", sans-serif;
+}
