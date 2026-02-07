@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap');
 @import "tailwindcss";
-@import "./css_properties.css";
+@import "./cssProperties.css";
 
 html,
 body {
@@ -30,6 +30,13 @@ h2 {
   margin: 1rem;
 }
 
+h3, p {
+  margin: 1rem;
+}
+
+input[type=radio] {
+  margin: 1rem;
+}
 
 .centered {
   display: flex;

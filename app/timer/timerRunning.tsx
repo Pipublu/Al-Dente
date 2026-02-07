@@ -1,12 +1,37 @@
 import { Play, Pause, Square} from 'lucide-react';
 import { useNavigate, useLocation } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function Timer() {
+export default function StartTimer() {
   const location = useLocation();
-  const time = location.state?.time || 0;
+  const total_time = location.state?.time || 0; 
 
-  let timeString = formatTime(time);
+
+  const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
+  const end_date = Date.now() + total_time * 60 * 1e3; // needs time in millisecs
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const time = end_date - Date.now();
+
+      if (time <= 0) { // if countdown is over
+        setMinutes(0);
+        setSeconds(0);
+        clearInterval(interval);
+        console.log("Timer done");
+        return;
+      }
+
+      // update timer
+      setMinutes(Math.floor((time / 1000 / 60) % 60));
+      setSeconds(Math.floor((time / 1000) % 60));
+
+    }, 1000); // call every 1s
+
+    return () => clearInterval(interval);
+  }, []);
 
   return <>
 
@@ -15,7 +40,7 @@ export default function Timer() {
 
       <div className="circle fill">
         <div className="circle circle-centre">
-          <p className="timer">{ timeString }</p>
+          <p className="timer">{ minutes } : { seconds }</p>
         </div>
       </div>
       <Buttons />
@@ -24,31 +49,10 @@ export default function Timer() {
   </>
 }
 
-function formatTime(time: number) {
-  // Takes time in minutes
-  let minutes = Math.floor(time);
-  let seconds = (time - minutes) * 60;
-  console.log(minutes, seconds);
 
-  let timeString = "";
-  
-  if (minutes < 10) {
-    timeString += "0";
-  }
-  timeString += minutes + ":";
 
-  if (seconds < 10) {
-    timeString += "0";
-  }
-  timeString += seconds;
-
-  console.log(timeString);
-  return timeString;
-}
-
-export function Buttons() {
+function Buttons() {
   let navigate = useNavigate();
-
   const [isVisible, setIsVisible] = useState(true);
 
   const toggleVisible = () => {
@@ -57,9 +61,9 @@ export function Buttons() {
   }
 
   const cancel = () => {
-    console.log("Timer canceled..");
-    navigate("/");
-  };
+    console.log("Stopping timer...");
+    navigate("/timer/ended");
+  }
 
 
   return <>
