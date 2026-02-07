@@ -13,7 +13,7 @@ export default function Menu() {
 
   const timer = () => {
     console.log("To set timer...");
-    navigate("/timer");
+    navigate("/timer", { state: { time: 0.2} });
   };
   return <>
     <div className="centered vbox">
