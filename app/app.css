@@ -34,8 +34,44 @@ h3, p {
   margin: 1rem;
 }
 
-input[type=radio] {
-  margin: 1rem;
+/* Radio buttons based on: https://www.markheath.net/post/customize-radio-button-css */
+
+.radio-toolbar input[type="radio"] {
+  opacity: 0;
+  position: fixed;
+  width: 0;
+}
+.radio-toolbar label {
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #df7a5b;
+  padding: 0.5rem;
+  width: 3.6rem;
+  height: 3.6rem;
+  border: 0.2rem solid #b73529;
+  border-radius: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.radio-toolbar input[type="radio"]:focus + label {
+  border: 0.2rem solid salmon;
+}
+
+.radio-toolbar label:hover {
+  border: 0.2rem solid rgb(32, 80, 32);
+  background-color: rgb(192, 205, 172);
+  cursor: pointer;
+
+}
+
+.radio-toolbar input[type="radio"]:checked + label {
+  background-color:rgb(108, 167, 108);
+  border-color: rgb(32, 80, 32);
+  cursor: pointer;
+
 }
 
 .centered {

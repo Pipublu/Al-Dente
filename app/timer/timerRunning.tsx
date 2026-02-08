@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useState, useEffect } from "react";
 
 export default function StartTimer() {
+  let navigate = useNavigate();
   const location = useLocation();
   const total_time = location.state?.time || 0; 
 
@@ -21,7 +22,7 @@ export default function StartTimer() {
         setSeconds(0);
         clearInterval(interval);
         console.log("Timer done");
-        return;
+        navigate("/timer/ended");
       }
 
       // update timer
