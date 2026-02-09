@@ -7,38 +7,34 @@ export default function StartTimer() {
   const location = useLocation();
   const total_time = location.state?.time || 0; 
 
+  const [timeLeft, setTimeLeft] = useState(total_time * 60 * 1000);
 
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
+  const seconds = Math.floor((timeLeft / 1000) % 60);
+  const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
+
+  const [isRunning, setIsRunning] = useState(true);
 
 
   useEffect(() => {
-    const end_date = Date.now() + total_time * 60 * 1e3; // time in millisecs
-    let timeout: ReturnType<typeof setTimeout>;
+    if (!isRunning) return;
 
-    const tick = () => {
-      const time = end_date - Date.now();
+     // time in millisecs
+    const interval = setInterval(() => {
 
-      if (time <= 0) { // if countdown is over
-        setMinutes(0);
-        setSeconds(0);
-        console.log("Timer done");
-        navigate("/timer/ended");
-      }
+      setTimeLeft(prev => {
+        if (prev <= 1000) {
+          clearInterval(interval);
+          navigate("/timer/ended");
+          return 0;
+        }
+        return prev - 1000;
+      });
+    }, 1000);
 
-      // update timer
-      setMinutes(Math.floor((time / 1000 / 60) % 60));
-      setSeconds(Math.floor((time / 1000) % 60));
-
-      timeout = setTimeout(tick, 1000 - (Date.now() % 1000));
-    }; // call every 1s
-
-    tick(); // to prevent it to look stuck as it is not being called first time
-    return () => clearTimeout(timeout);
-  }, [total_time, navigate]);
+    return () => clearInterval(interval);
+  }, [isRunning, navigate]);
 
   return <>
-
     <div className="centered vbox">
       <h2>Cooking...</h2>
 
@@ -47,51 +43,45 @@ export default function StartTimer() {
           <p className="timer">{ minutes } : { seconds }</p>
         </div>
       </div>
-      <Buttons />
-      
+      <Buttons 
+        isRunning={isRunning}
+        onPause={() => setIsRunning(prev => !prev)}
+        onCancel={() => navigate("/timer/ended")}
+        />
     </div>
   </>
 }
 
 
+interface ButtonsProps {
+  isRunning: boolean;
+  onPause: () => void;
+  onCancel: () => void;
+}
 
-function Buttons() {
-  let navigate = useNavigate();
-  const [isVisible, setIsVisible] = useState(true);
-
-  const toggleVisible = () => {
-    setIsVisible(!isVisible);
-    console.log("Pause set to: ", isVisible);
-  }
-
-  const cancel = () => {
-    console.log("Stopping timer...");
-    navigate("/timer/ended");
-  }
-
-
+function Buttons({ isRunning, onPause, onCancel }: ButtonsProps) {
   return <>
     <div className="hbox">
       <div>
         {
-          isVisible && ( <Pause 
-            onClick={toggleVisible}
+          isRunning ? ( 
+          <Pause 
+            onClick={onPause}
             className="icon"
             color="red"
-            size={48}/>)
-        }{
-          !isVisible && ( <Play 
-            onClick={toggleVisible}
+            size={48}/>
+          ) : (
+          <Play 
+            onClick={onPause}
             className="icon"
             color="red"
-            size={48}/>)
-        }
+            size={48}/>
+          )}
       </div>
-      
       
       <div className="spacer"></div>
       <Square 
-        onClick={cancel}
+        onClick={onCancel}
         className="icon"
         color="red"
         size={48}/>
