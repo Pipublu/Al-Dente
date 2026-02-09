@@ -9,6 +9,7 @@ export default function Menu() {
 
   const view = () => {
     console.log("To view pasta..");
+    navigate("/gallery");
   };
 
   const timer = () => {
