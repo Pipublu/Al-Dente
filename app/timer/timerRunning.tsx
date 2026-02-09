@@ -11,16 +11,17 @@ export default function StartTimer() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
 
-  const end_date = Date.now() + total_time * 60 * 1e3; // needs time in millisecs
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const end_date = Date.now() + total_time * 60 * 1e3; // time in millisecs
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
       const time = end_date - Date.now();
 
       if (time <= 0) { // if countdown is over
         setMinutes(0);
         setSeconds(0);
-        clearInterval(interval);
         console.log("Timer done");
         navigate("/timer/ended");
       }
@@ -29,10 +30,12 @@ export default function StartTimer() {
       setMinutes(Math.floor((time / 1000 / 60) % 60));
       setSeconds(Math.floor((time / 1000) % 60));
 
-    }, 1000); // call every 1s
+      timeout = setTimeout(tick, 1000 - (Date.now() % 1000));
+    }; // call every 1s
 
-    return () => clearInterval(interval);
-  }, []);
+    tick(); // to prevent it to look stuck as it is not being called first time
+    return () => clearTimeout(timeout);
+  }, [total_time, navigate]);
 
   return <>
 

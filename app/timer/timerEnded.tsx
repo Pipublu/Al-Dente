@@ -27,11 +27,11 @@ export default function TimerEnded() {
     <p>Pasta should be done cooking! Do a taste test, the pasta should be slightly chewy. If not, cook for a bit longer!</p>
     <div className="radio-toolbar centered">
       <input id="1" type="radio" name="time" onChange={handleOptionChange} checked={time === 30} value="30" />
-      <label for="1"> 30s </label>
+      <label htmlFor="1"> 30s </label>
       <input id="2" type="radio" name="time" onChange={handleOptionChange} checked={time === 60} value="60"/>
-      <label for="2"> 1min </label>
+      <label htmlFor="2"> 1min </label>
       <input id="3" type="radio" name="time" onChange={handleOptionChange} checked={time === 120} value="120"/>
-      <label for="3"> 2min </label>
+      <label htmlFor="3"> 2min </label>
     </div>
     <button className="menu-button" onClick={startTimer}>Start new timer</button>
     <button className="menu-button" onClick={back}>Back</button>

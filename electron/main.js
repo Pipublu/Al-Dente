@@ -6,17 +6,35 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let mainWindow;
 
-app.on("ready", () => {
-  mainWindow = new BrowserWindow ({
-    width: 500,
-    height: 600,
+function createMainWindow() {
+  let window_width = 500;
+  let window_height = 600;
+
+  if (!app.isPackaged) {
+    // In dev, allocate more width for DevTools
+    window_width = 800;
+  }
+
+  mainWindow = new BrowserWindow({
+    width: window_width,
+    height: window_height,
   });
 
-  app.isPackaged
-    ? mainWindow.loadFile(path.join(__dirname, "index.html")) // Prod
-    : (mainWindow.loadURL("http://localhost:5173") // Dev
-      ,mainWindow.webContents.openDevTools() // Open dev tools
-)});
+  if (app.isPackaged) {
+    // If production
+    mainWindow.loadFile(path.join(__dirname, "index.html"));
+  } else {
+    // In dev open the Vite dev server and DevTools
+    mainWindow.loadURL("http://localhost:5173");
+    mainWindow.webContents.openDevTools();
+  }
+
+  mainWindow.on('closed', () => {
+    mainWindow = null;
+  });
+}
+
+app.whenReady().then(createMainWindow);
 
 // Listen for close app from renderer
 ipcMain.on("close-app", () => {
