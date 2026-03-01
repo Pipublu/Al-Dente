@@ -1,4 +1,4 @@
-import type { Pasta, PastaDict } from "types/pasta";
+import type { Pasta, PastaResponse } from "types/pasta";
 
 async function readJsonFile(filePath: string) {
     try {
@@ -29,13 +29,13 @@ function toPasta(obj: any): Pasta {
 }
 
 
-export function fetchPasta(): Promise<PastaDict> {
+export function fetchPasta(): Promise<PastaResponse> {
   const filePath = "/pasta.json";
 
   return readJsonFile(filePath)
     .then(data => {
       console.log("Read pasta data: ", data)
-      return data as PastaDict;
+      return data as PastaResponse;
     })
     .catch(error => {
         console.error("Failed to read pasta data: ", error)

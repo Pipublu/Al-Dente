@@ -8,4 +8,6 @@ export interface Pasta {
   description: string;
 }
 
-export type PastaDict = Record<string, Pasta>;
+export type PastaResponse = {
+  pasta: Pasta[];
+};
