@@ -8,7 +8,7 @@ import type { Pasta } from "types/pasta";
 export default function Gallery() {
   let navigate = useNavigate();
 
-  const PAGE_SIZE = 1;
+  const PAGE_SIZE = 4;
   const [currentPage, setCurrentPage] = useState(1);
   const [pastaArray, setPasta] = useState<Pasta[]>([]);
 
@@ -20,6 +20,10 @@ export default function Gallery() {
   const back = () => {
     console.log("Leaving gallery..");
     navigate("/");
+  };
+
+  const setPage = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   const loadPasta = async () => {
@@ -56,6 +60,7 @@ export default function Gallery() {
       <Navigator
         currentPage={currentPage}
         totalPages={totalPages}
+        onPageChange={setPage}
        />
       <button onClick={back}> Back </button>
 
@@ -81,35 +86,35 @@ function Thumbnail({ pasta } : ThumbnailProps) {
 interface NavigatorProps {
   currentPage: number;
   totalPages: number;
+  onPageChange: (pageNumber: number) => void;
 }
 
-function Navigator({ currentPage, totalPages } : NavigatorProps) {
-
-   /*{
-      !collapse ?
-      (Array.from({ length: totalPages }, (_, i) => (
-      <button key={i + 1}>{i + 1}</button>
-      )))
-      :
-      
-    } */
+function Navigator({ currentPage, totalPages, onPageChange } : NavigatorProps) {
 
   return<>
   <div className="centered">
-    <button> &lt; </button>
+    <button 
+      disabled={currentPage === 1}
+      className="pagination-btn"
+      onClick={() => onPageChange(currentPage - 1)}
+    > &lt; </button>
       {
         Array.from({ length: totalPages}, (_, i) => {
           return(
             <button 
             key={i + 1}
-            style={{
-            transform: (i + 1) === currentPage ? "scale(1.2)" : "scale(1)"}}
+            onClick={() => onPageChange(i + 1)}
+            className={(i + 1) === currentPage ? "pagination-active-btn pagination-btn" : "pagination-btn"}
             >
               {i + 1}
             </button>)
       })
       }
-    <button> &gt; </button>
+    <button 
+      disabled={currentPage === totalPages}
+      className="pagination-btn"
+      onClick={() => onPageChange(currentPage + 1)}
+    > &gt; </button>
 
   </div>
   </>
