@@ -60,45 +60,35 @@ h3, p {
 .grid >* {
   margin: 0.4rem;
 }
-/* Radio buttons based on: https://www.markheath.net/post/customize-radio-button-css */
 
-.radio-toolbar input[type="radio"] {
-  opacity: 0;
-  position: fixed;
-  width: 0;
-}
-.radio-toolbar label {
-  margin: 0.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #df7a5b;
+.radio-toolbar {
   padding: 0.5rem;
-  width: 3.6rem;
-  height: 3.6rem;
-  border: 0.2rem solid #b73529;
-  border-radius: 1.4rem;
-  font-weight: bold;
-  cursor: pointer;
 }
 
-.radio-toolbar input[type="radio"]:focus + label {
-  border: 0.2rem solid salmon;
+.radio-toolbar >* {
+  margin: 0.5rem;
 }
 
-.radio-toolbar label:hover {
-  border: 0.2rem solid rgb(32, 80, 32);
-  background-color: rgb(192, 205, 172);
-  cursor: pointer;
+input {
+  appearance: none;
 
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+
+  border: 2px solid var(--contrast);
+  transition: 0.2s all linear;
+  margin-right: 5px;
+
+  position: relative;
+  top: 4px;
 }
 
-.radio-toolbar input[type="radio"]:checked + label {
-  background-color:rgb(108, 167, 108);
-  border-color: rgb(32, 80, 32);
-  cursor: pointer;
-
+input:checked {
+  border: 7px solid var(--green);
 }
+
+
 
 .centered {
   display: flex;
@@ -123,7 +113,7 @@ h3, p {
 
 .fill {
   margin: 1rem;
-  background-color: rgb(96, 162, 105);
+  background-color: var(--green);
   width: 13rem;
   height: 13rem;
 }
@@ -165,6 +155,10 @@ h3, p {
 .spacer {
   display: flex;
   width: 10rem;
+}
+
+.current-page-button {
+  background-color: #b73529;
 }
 
 @media only screen and (max-width: 440px) {

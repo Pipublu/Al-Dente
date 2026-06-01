@@ -84,25 +84,31 @@ interface NavigatorProps {
 }
 
 function Navigator({ currentPage, totalPages } : NavigatorProps) {
-  const collapse = totalPages > 3;
-  const firstPage = currentPage == 1;
 
-
-  return<>
-  <div className="centered">
-    <button> &lt; </button>
-    {
+   /*{
       !collapse ?
       (Array.from({ length: totalPages }, (_, i) => (
       <button key={i + 1}>{i + 1}</button>
       )))
       :
-      (<div>
-        <button>1</button>
-        <button>{ currentPage}</button>
-        <button>{ totalPages + 1}</button>
-      </div>)
-    }
+      
+    } */
+
+  return<>
+  <div className="centered">
+    <button> &lt; </button>
+      {
+        Array.from({ length: totalPages}, (_, i) => {
+          return(
+            <button 
+            key={i + 1}
+            style={{
+            transform: (i + 1) === currentPage ? "scale(1.2)" : "scale(1)"}}
+            >
+              {i + 1}
+            </button>)
+      })
+      }
     <button> &gt; </button>
 
   </div>
