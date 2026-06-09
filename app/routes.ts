@@ -4,10 +4,10 @@ export default [
   index("routes/home.tsx"),
 
   route("gallery", "view/gallery.tsx"),
+  route("view", "view/viewPasta.tsx"),
   route("timer", "timer/timer.tsx"),
   route("timer/ended", "timer/timerEnded.tsx"),
   route("timer/running", "timer/timerRunning.tsx"),
-  //route("view", "view.tsx"),
   //route("complete", "complete.tsx"),
   //route("overview", "overview.tsx"),
 ] satisfies RouteConfig;

@@ -26,6 +26,17 @@ export default function Gallery() {
     setCurrentPage(pageNumber);
   };
 
+  const viewPasta = (id: number) => {
+    console.log("Viewing pasta with id: ", id);
+    const pasta = pastaArray.find((p) => p.id === id);
+
+    if (!pasta) {
+      console.log("Error: No pasta with id ", id, " found");
+    } else {
+      navigate("/view", { state: { pastaItem: pasta} });
+    }
+  }
+
   const loadPasta = async () => {
       try {
         const data = await fetchPasta();
@@ -54,7 +65,7 @@ export default function Gallery() {
       <h2>Choose pasta</h2>
       <div className="grid">
         {currentItems.map((p) => (
-          <Thumbnail key={p.id} pasta={p} />
+          <Thumbnail key={p.id} pasta={p} onViewPasta={viewPasta}/>
          ))}
       </div>
       <Navigator
@@ -70,12 +81,13 @@ export default function Gallery() {
 
 type ThumbnailProps = {
   pasta: Pasta;
+  onViewPasta: (id: number) => void;
 };
 
-function Thumbnail({ pasta } : ThumbnailProps) {
+function Thumbnail({ pasta, onViewPasta } : ThumbnailProps) {
 
   return <>
-  <div className="centered thumbnail vbox">
+  <div className="centered thumbnail vbox" onClick={() => onViewPasta(pasta.id)}>
     <label>{pasta.name}</label>
     <label>{pasta.cookTime.min}-{pasta.cookTime.max}min</label>
   </div>

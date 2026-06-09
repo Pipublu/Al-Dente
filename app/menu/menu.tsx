@@ -12,10 +12,6 @@ export default function Menu() {
     navigate("/gallery");
   };
 
-  /*const timer = () => {
-    console.log("To set timer...");
-    navigate("/timer", { state: { time: 0.2, type: "Penne" } });
-  };*/
   return <>
     <div className="centered vbox">
       <h1 className="title">Al Dente</h1>
