@@ -5,6 +5,7 @@ export default [
 
   route("gallery", "view/gallery.tsx"),
   route("view", "view/viewPasta.tsx"),
+  route("edit", "view/editPasta.tsx"),
   route("timer", "timer/timer.tsx"),
   route("timer/ended", "timer/timerEnded.tsx"),
   route("timer/running", "timer/timerRunning.tsx"),

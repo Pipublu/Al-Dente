@@ -13,7 +13,7 @@ export default function Menu() {
   };
 
   return <>
-    <div className="centered vbox">
+    <div className="vbox">
       <h1 className="title">Al Dente</h1>
       <div className="vbox">
         <div className="v-spacer"></div>

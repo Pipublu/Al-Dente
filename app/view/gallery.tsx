@@ -4,7 +4,6 @@ import { fetchPasta } from "utils/csvReader";
 import type { Pasta } from "types/pasta";
 
 
-
 export default function Gallery() {
   let navigate = useNavigate();
 
@@ -21,6 +20,12 @@ export default function Gallery() {
     console.log("Leaving gallery..");
     navigate("/");
   };
+
+  const addPasta = () => {
+    console.log("Leaving gallery..");
+    navigate("/edit");
+  };
+
 
   const setPage = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -62,7 +67,11 @@ export default function Gallery() {
 
   return <>
     <div className="centered vbox">
-      <h2>Choose pasta</h2>
+      <div className="topbar">
+        <button className="small-btn" onClick={back}>Back</button>
+        <h2>Choose pasta</h2>
+        <button className="small-btn" onClick={addPasta}>Add</button>
+      </div>
       <div className="grid">
         {currentItems.map((p) => (
           <Thumbnail key={p.id} pasta={p} onViewPasta={viewPasta}/>
@@ -73,7 +82,6 @@ export default function Gallery() {
         totalPages={totalPages}
         onPageChange={setPage}
        />
-      <button onClick={back}> Back </button>
 
     </div>
   </>
