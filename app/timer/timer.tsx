@@ -9,7 +9,7 @@ export default function Timer() {
 
   const start = () => {
     console.log("Starting timer for : ", total_time);
-    navigate("/timer/running", { state: { time: 0.1 } });
+    navigate("/timer/running", { state: { time: total_time } });
   }
 
   const back = () => {
@@ -22,8 +22,8 @@ export default function Timer() {
     <div className="centered vbox">
       <h2>Ready to cook some { pasta_name }?</h2>
       <h3>Cooktime: { total_time * 60 } minutes</h3>
-      <button className="menu-button" onClick={start}> Start timer </button>
-      <button className="menu-button" onClick={back}> Back </button>
+      <button className="menu-btn dark-btn" onClick={start}> Start timer </button>
+      <button className="menu-btn dark-btn" onClick={back}> Back </button>
     </div>
   </>
 }

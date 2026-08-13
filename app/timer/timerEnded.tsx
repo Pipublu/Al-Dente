@@ -40,8 +40,8 @@ export default function TimerEnded() {
       </div>
       
     </div>
-    <button className="menu-button" onClick={startTimer}>Start new timer</button>
-    <button className="menu-button" onClick={back}>Back</button>
+    <button className="menu-btn dark-btn" onClick={startTimer}>Start new timer</button>
+    <button className="menu-btn dark-btn" onClick={back}>Back</button>
   </div>
   </>
 }

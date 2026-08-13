@@ -13,12 +13,12 @@ export default function Menu() {
   };
 
   return <>
-    <div className="vbox">
+    <div className="centered vbox">
       <h1 className="title">Al Dente</h1>
       <div className="vbox">
         <div className="v-spacer"></div>
-        <button className="menu-button" onClick={view}> Start cooking </button>
-        <button className="menu-button" onClick={exit}> Quit </button>
+        <button className="menu-btn dark-btn" onClick={view}>Start cooking</button>
+        <button className="menu-btn dark-btn" onClick={exit}>Quit</button>
       </div>
     </div>
   </>

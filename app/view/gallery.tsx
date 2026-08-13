@@ -66,13 +66,13 @@ export default function Gallery() {
 }, []);
 
   return <>
-    <div className="centered vbox">
+    <div className="centered tight vbox">
       <div className="topbar">
-        <button className="small-btn" onClick={back}>Back</button>
+        <button className="small-btn dark-btn" onClick={back}>Back</button>
         <h2>Choose pasta</h2>
-        <button className="small-btn" onClick={addPasta}>Add</button>
+        <button className="small-btn dark-btn" onClick={addPasta}>Add</button>
       </div>
-      <div className="grid">
+      <div className="grid grid-gallery">
         {currentItems.map((p) => (
           <Thumbnail key={p.id} pasta={p} onViewPasta={viewPasta}/>
          ))}
@@ -97,7 +97,7 @@ function Thumbnail({ pasta, onViewPasta } : ThumbnailProps) {
   return <>
   <div className="centered thumbnail vbox" onClick={() => onViewPasta(pasta.id)}>
     <label>{pasta.name}</label>
-    <label>{pasta.cookTime.min}-{pasta.cookTime.max}min</label>
+    <label>{pasta.cookTime}min</label>
   </div>
   </>
 }

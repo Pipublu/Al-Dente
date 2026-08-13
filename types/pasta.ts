@@ -1,11 +1,8 @@
 export interface Pasta {
-  id: number;
-  name: string;
-  cookTime: {
-    min: number,
-    max: number
-  };
-  description: string;
+  id: number,
+  name: string,
+  cookTime: number,
+  description: string
 }
 
 export type PastaResponse = {
