@@ -34,6 +34,14 @@ h3, p {
   margin: 1rem;
 }
 
+.bold {
+  font-weight: bold;
+}
+
+.small-font {
+  font-size: smaller;
+}
+
 .large-text {
   font-size: 1.7rem;
 }
@@ -371,6 +379,14 @@ button:disabled {
 
   .grid-large-spacing {
   gap: 5rem;
+  }
+
+  .small-font {
+    font-size: medium;
+  }
+
+  label {
+    font-size: medium;
   }
   
 }

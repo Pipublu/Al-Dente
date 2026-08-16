@@ -1,5 +1,5 @@
 export interface Pasta {
-  id: number,
+  id: string,
   name: string,
   cookTime: number,
   description: string

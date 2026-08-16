@@ -1,6 +1,6 @@
 import { useNavigate, useLocation } from "react-router";
 import { useState, useEffect } from "react";
-import { fetchPasta } from "utils/csvReader";
+import { savePasta } from "utils/fileHandler";
 import { secondsToHMS } from "utils/calculations";
 import type { Pasta } from "types/pasta";
 
@@ -19,7 +19,6 @@ export default function EditPasta() {
 
   if (pasta) {
     time = secondsToHMS(pasta.cookTime);
-    console.log(time);
   }
 
   const [seconds, setSeconds] = useState(time?.sec ?? 0);
@@ -37,6 +36,19 @@ export default function EditPasta() {
     if (newTime <= 0) {
       console.log("Time has to be greater than 0");
       return;
+    }
+    const pastaId = pasta? pasta.id : "";
+    const newPasta = {
+      id: pastaId,
+      name: title,
+      description: description,
+      cookTime: newTime,
+    }
+    try {
+      savePasta(newPasta);
+      navigate("/gallery");
+    } catch (error) {
+      console.log("Could not create/update pasta: ", error);
     }
   }
 

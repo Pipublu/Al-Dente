@@ -1,27 +1,27 @@
 {
   "pasta": [
     { 
-      "id" : 0,
+      "id" : "0",
       "name" : "Spagetthi",
-      "cookTime": 8,
+      "cookTime": 480,
       "description" : "Thin long pasta. Good with sauce, simple and good for any dinner."
     },
     {
-      "id" : 1,
+      "id" : "1",
       "name" : "Penne",
-      "cookTime": 12,
+      "cookTime": 720,
       "description" : "Hollow log shaped pasta. Good with sauce, simple and good for any dinner."
     },
     {
-      "id" : 2,
+      "id" : "2",
       "name" : "Farfalle",
-      "cookTime": 12,
+      "cookTime": 720,
       "description" : "Butterfly shaped pasta. Good with sauce, simple and good for any dinner."
     },
     {
-      "id" : 3,
+      "id" : "3",
       "name" : "Fettuccine",
-      "cookTime": 3,
+      "cookTime": 180,
       "description" : "Thin flat pasta. Good with sauce, simple and good for any dinner."
     }
   ]

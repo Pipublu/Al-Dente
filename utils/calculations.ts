@@ -7,9 +7,9 @@ export function calculatePages(numbItems: number, pageSize: number) {
 }
 
 export function secondsToHMS(time: number) {
-  const hours = Math.floor(time / 60);
-  const minutes = Math.floor(time);
-  const seconds = (time - Math.floor(time)) * 60;
+  const hours = Math.floor(time / 60**2);
+  const minutes = Math.floor(time / 60) % 60;
+  const seconds = (time - hours * (60**2) - minutes * 60);
   return {
     h: hours,
     min: minutes,

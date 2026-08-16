@@ -1,19 +1,26 @@
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { fetchPasta } from "utils/csvReader";
+import { fetchPasta } from "utils/fileHandler";
 import type { Pasta } from "types/pasta";
+import { secondsToHMS } from "utils/calculations";
 
 
 export default function Gallery() {
   let navigate = useNavigate();
 
-  const PAGE_SIZE = 4;
+  const getPageSize = () => {
+  if (window.innerWidth < 455) return 4;
+  if (window.innerWidth < 600) return 6;
+  return 8;
+  };
+
+  let page_size = getPageSize();
   const [currentPage, setCurrentPage] = useState(1);
   const [pastaArray, setPasta] = useState<Pasta[]>([]);
 
-  const totalPages = Math.ceil(pastaArray.length / PAGE_SIZE);
-  const startIndex = (currentPage - 1) * PAGE_SIZE;
-  const endIndex = startIndex + PAGE_SIZE;
+  const totalPages = Math.ceil(pastaArray.length / page_size);
+  const startIndex = (currentPage - 1) * page_size;
+  const endIndex = startIndex + page_size;
   const currentItems = pastaArray.slice(startIndex, endIndex);
 
   const back = () => {
@@ -31,7 +38,7 @@ export default function Gallery() {
     setCurrentPage(pageNumber);
   };
 
-  const viewPasta = (id: number) => {
+  const viewPasta = (id: string) => {
     console.log("Viewing pasta with id: ", id);
     const pasta = pastaArray.find((p) => p.id === id);
 
@@ -44,9 +51,11 @@ export default function Gallery() {
 
   const loadPasta = async () => {
       try {
+        const stored = localStorage.getItem("pastaArray");
+        console.log("stored data: ", stored);
         const data = await fetchPasta();
         setPasta(data.pasta);
-        sessionStorage.setItem("pastaArray", JSON.stringify(data.pasta));
+        localStorage.setItem("pastaArray", JSON.stringify(data.pasta));
       } catch (error) {
         console.log("Error: ", error)
         back();
@@ -54,10 +63,11 @@ export default function Gallery() {
     };
 
   useEffect(() => {
-    const stored = sessionStorage.getItem("pastaArray");
+    const stored = localStorage.getItem("pastaArray");
 
     if (stored) {
       console.log("Fetching pastas from storage...")
+      console.log(JSON.parse(stored));
       setPasta(JSON.parse(stored));
     } else {
       console.log("Fetchig pasta from file...")
@@ -89,15 +99,16 @@ export default function Gallery() {
 
 type ThumbnailProps = {
   pasta: Pasta;
-  onViewPasta: (id: number) => void;
+  onViewPasta: (id: string) => void;
 };
 
 function Thumbnail({ pasta, onViewPasta } : ThumbnailProps) {
 
+  const time = secondsToHMS(pasta.cookTime);
   return <>
   <div className="centered thumbnail vbox" onClick={() => onViewPasta(pasta.id)}>
-    <label>{pasta.name}</label>
-    <label>{pasta.cookTime}min</label>
+    <label className="bold">{pasta.name}</label>
+    <label className="small-font">{time.h > 0 ? time.h + " h " : ""} {time.min > 0 ? time.min + " min " : ""} {time.sec > 0 ? time.sec + " sec" : ""}</label>
   </div>
   </>
 }
