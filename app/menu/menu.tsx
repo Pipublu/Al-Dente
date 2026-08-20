@@ -5,12 +5,17 @@ export default function Menu() {
 
   const exit = () => {
     console.log("Exiting...");
+ 
   };
 
+
   const view = () => {
-    console.log("To view pasta..");
     navigate("/gallery");
   };
+
+  const settings = () => {
+    navigate("/settings");
+  }
 
   return <>
     <div className="centered vbox">
@@ -18,6 +23,7 @@ export default function Menu() {
       <div className="vbox">
         <div className="v-spacer"></div>
         <button className="menu-btn dark-btn" onClick={view}>Start cooking</button>
+        <button className="menu-btn dark-btn" onClick={settings}>Manage pasta</button>
         <button className="menu-btn dark-btn" onClick={exit}>Quit</button>
       </div>
     </div>

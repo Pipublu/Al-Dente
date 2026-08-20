@@ -27,8 +27,8 @@ function toPasta(obj: any): Pasta {
 }
 
 
-export function fetchPasta(): Promise<PastaResponse> {
-  const filePath = "/pasta.json";
+export function fetchPasta(path?:string): Promise<PastaResponse> {
+  const filePath = path? path : "/pasta.json";
 
   return readJsonFile(filePath)
     .then(data => {
@@ -39,6 +39,30 @@ export function fetchPasta(): Promise<PastaResponse> {
         console.log("Failed to read pasta data: ", error)
         throw error;
     });
+}
+
+export async function readPastaFromFileObject(file: File): Promise<Pasta[]> {
+  const raw = await file.text();
+  const parsed = JSON.parse(raw);
+  const data = Array.isArray(parsed) ? parsed: parsed?.pasta;
+  return data;
+}
+
+export function mergePastaLists(newPasta: Pasta[]): Pasta[]  {
+  console.log("New Pasta: ", newPasta);
+  const oldPasta = getStoredPasta();
+  
+  for (const update of newPasta) {
+    const index = oldPasta.findIndex(item => item.id === update.id);
+    if (index !== -1) {
+      // Replace old pasta if same id
+      oldPasta[index] = update;
+    } else {
+      // Else add
+      oldPasta.push(update);
+    }
+  }
+  return oldPasta.sort((a,b) => a.name.localeCompare(b.name));
 }
 
 
@@ -57,14 +81,14 @@ export function savePasta(newPasta: Pasta) {
 
   let newPastaList;
   // Update pasta
-  if (!newPasta.id) {
+  if (newPasta.id) {
     newPastaList = pastaObjects.map((p) => p.id == newPasta.id ? newPasta : p);
     console.log("Updated pasta: ", newPasta.name);
   } else {
     // New pasta
     newPasta.id = generateNewId(pastaObjects);
 
-    if (newPasta.id) {
+    if (!newPasta.id) {
       throw new Error("Could not generate UUID");
     }
     newPastaList = pastaObjects.concat(newPasta);
@@ -72,7 +96,8 @@ export function savePasta(newPasta: Pasta) {
   }
 
   // Update storage
-  localStorage.setItem("pastaArray", JSON.stringify(newPastaList));
+  const sortedPasta = newPastaList.sort((a,b) => a.name.localeCompare(b.name));
+  localStorage.setItem("pastaArray", JSON.stringify(sortedPasta));
 }
 
 function generateNewId(pastaList: Pasta[]): string {

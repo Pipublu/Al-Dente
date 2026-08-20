@@ -9,6 +9,6 @@ export default [
   route("timer", "timer/timer.tsx"),
   route("timer/ended", "timer/timerEnded.tsx"),
   route("timer/running", "timer/timerRunning.tsx"),
-  //route("complete", "complete.tsx"),
-  //route("overview", "overview.tsx"),
+  route("settings", "menu/settings.tsx"),
+
 ] satisfies RouteConfig;

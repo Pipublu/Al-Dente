@@ -84,6 +84,12 @@ h3, p {
   height: 4rem;
 }
 
+.grid-2col {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+}
+
 .grid {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -164,6 +170,10 @@ textarea {
 
 .full-width {
   width: 100%;
+}
+
+.medium-width {
+  width: 80%;
 }
 
 .form-input-large {
@@ -312,7 +322,7 @@ textarea {
 
 .v-spacer {
   display: flex;
-  height: 4rem;
+  height: 3rem;
 }
 
 button:disabled {
@@ -369,17 +379,15 @@ button:disabled {
 
 @media only screen and (min-width: 700px) {
   .thumbnail {
-  height: 9rem;
-  width: 9rem;
+    height: 9rem;
+    width: 9rem;
   } 
 
   textarea {
-  height: 10rem;
+    height: 10rem;
   }
 
-  .grid-large-spacing {
-  gap: 5rem;
-  }
+  
 
   .small-font {
     font-size: medium;
@@ -388,5 +396,41 @@ button:disabled {
   label {
     font-size: medium;
   }
+
+  .menu-btn {
+    font-size: 1.2rem;
+    width: 20rem;
+    margin: 0.4rem; 
+  }
+
+  .small-btn {
+    font-size: 1.2rem;
+    width: 5rem;
+    height: 5rem;
+  }
   
+}
+
+@media only screen and (min-height: 700px) {
+
+  .v-spacer {
+    display: flex;
+    height: 7rem;
+  }
+
+  .vbox {
+    gap: 1rem;
+  }
+
+  .menu-btn {
+    font-size: 1.2rem;
+    width: 20rem;
+    margin: 0.4rem; 
+  }
+
+  .small-btn {
+    font-size: 1.2rem;
+    width: 5rem;
+    height: 5rem;
+  }
 }

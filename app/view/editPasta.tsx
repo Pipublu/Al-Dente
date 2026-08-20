@@ -1,16 +1,13 @@
 import { useNavigate, useLocation } from "react-router";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { savePasta } from "utils/fileHandler";
 import { secondsToHMS } from "utils/calculations";
-import type { Pasta } from "types/pasta";
 
 
 export default function EditPasta() {
   let navigate = useNavigate();
   const location = useLocation();
   const pasta = location.state?.pasta ?? undefined;
-
-  const validForm = false;
 
   const [title, setTitle] = useState(pasta?.name ?? "");
   const [description, setDescription] = useState(pasta?.description ?? "");
@@ -50,6 +47,7 @@ export default function EditPasta() {
     } catch (error) {
       console.log("Could not create/update pasta: ", error);
     }
+    console.log("Save/Updated: ", localStorage.getItem("pastaArray"));
   }
 
   const transformTimeInput = () => {
@@ -83,7 +81,7 @@ export default function EditPasta() {
         <div className="left-align full-width">
           <label>Cook-time:</label> 
         </div>
-        <div className="">
+        <div>
           <div className="grid grid-large-spacing text-gray-600">
             <label>hh</label>
             <label>mm</label>

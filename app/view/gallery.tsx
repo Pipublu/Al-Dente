@@ -54,8 +54,9 @@ export default function Gallery() {
         const stored = localStorage.getItem("pastaArray");
         console.log("stored data: ", stored);
         const data = await fetchPasta();
-        setPasta(data.pasta);
-        localStorage.setItem("pastaArray", JSON.stringify(data.pasta));
+        const sortedPasta = data.pasta.sort((a,b) => a.name.localeCompare(b.name));
+        setPasta(sortedPasta);
+        localStorage.setItem("pastaArray", JSON.stringify(sortedPasta));
       } catch (error) {
         console.log("Error: ", error)
         back();
