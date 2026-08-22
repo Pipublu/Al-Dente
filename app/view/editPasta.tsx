@@ -2,12 +2,16 @@ import { useNavigate, useLocation } from "react-router";
 import { useState} from "react";
 import { savePasta } from "utils/fileHandler";
 import { secondsToHMS } from "utils/calculations";
+import { useToast } from "~/toast/toastContext";
 
 
 export default function EditPasta() {
   let navigate = useNavigate();
   const location = useLocation();
   const pasta = location.state?.pasta ?? undefined;
+
+  const { showToast } = useToast();
+
 
   const [title, setTitle] = useState(pasta?.name ?? "");
   const [description, setDescription] = useState(pasta?.description ?? "");
@@ -30,8 +34,10 @@ export default function EditPasta() {
   
   const save = () => {
     const newTime = transformTimeInput();
-    if (newTime <= 0) {
-      console.log("Time has to be greater than 0");
+
+    const valid = (newTime > 0) && title && description;
+    if (!valid) {
+       showToast("Error!", "Form contains invalid fields. Please fill out all fields.", "red");
       return;
     }
     const pastaId = pasta? pasta.id : "";
@@ -44,8 +50,15 @@ export default function EditPasta() {
     try {
       savePasta(newPasta);
       navigate("/gallery");
+      if (pastaId === "") {
+        showToast("Success!", `Created new pasta "${title}".`, "green");
+      } else {
+        showToast("Success!", `Updated pasta "${title}".`, "green");
+      }
+      
     } catch (error) {
       console.log("Could not create/update pasta: ", error);
+      showToast("Error!", `Could not save pasta "${title}."`, "red");
     }
     console.log("Save/Updated: ", localStorage.getItem("pastaArray"));
   }

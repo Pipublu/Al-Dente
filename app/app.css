@@ -34,6 +34,27 @@ h3, p {
   margin: 1rem;
 }
 
+.toast.fade-out {
+  opacity: 0;
+}
+
+.toast {
+  border-radius: 1rem;
+  width: 30rem;
+  max-height: 7rem;
+  overflow: scroll;
+  padding: 0.75rem;
+  position: fixed;
+  top: 20px;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.toast >* {
+  margin: 0.4rem;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -44,6 +65,10 @@ h3, p {
 
 .large-text {
   font-size: 1.7rem;
+}
+
+.medium-font {
+  font-size: larger;
 }
 
 .thumbnail {
@@ -368,6 +393,10 @@ button:disabled {
   form >* {
   margin: 0.6rem;
   }
+
+  .toast {
+    max-width: 80%;
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -387,7 +416,9 @@ button:disabled {
     height: 10rem;
   }
 
-  
+  .toast {
+    max-width: 40rem;
+  }
 
   .small-font {
     font-size: medium;
@@ -433,4 +464,10 @@ button:disabled {
     width: 5rem;
     height: 5rem;
   }
+
+   .toast {
+    max-height: 10rem;
+  }
+
+  
 }

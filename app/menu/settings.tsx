@@ -3,11 +3,14 @@ import { useState, useRef, type ChangeEvent} from "react";
 import type { PastaResponse } from "types/pasta";
 import { downloadJSON, fetchPasta, mergePastaLists, readPastaFromFileObject } from "utils/fileHandler";
 import { ArrowDownToLine, Plus, Undo2, Minus } from 'lucide-react';
+import { useToast } from "~/toast/toastContext";
 
 export default function Settings() {
   let navigate = useNavigate();
 
   const fileInput = useRef<HTMLInputElement>(null);
+  const { showToast } = useToast();
+  
 
 
   const back = () => {
@@ -17,6 +20,8 @@ export default function Settings() {
   const reset = () => {
     localStorage.removeItem("pastaArray");
     console.log("Reset pastas!");
+    showToast("Success!", "Reset pasta gallery to default pasta.", "green");
+
   }
 
   const download = () => {
@@ -28,11 +33,13 @@ export default function Settings() {
 
     if(!file) {
       console.log("No file uploaded...");
+      showToast("Error!", "No file chosen.", "red");
       return;
     }
 
     if (file.type !== "application/json" && !file.name.endsWith(".json")) {
       console.log("File must be .JSON");
+      showToast("Error!", "File must be .JSON.", "red");
       return;
     }  
 
@@ -41,8 +48,11 @@ export default function Settings() {
       const pastaArray = mergePastaLists(data);
       localStorage.setItem("pastaArray", JSON.stringify(pastaArray));
       console.log("Set new pasta: ", pastaArray);
+      showToast("Success!", `Imported pasta from "${file.name}".`, "green");
+
     } catch (err) {
       console.log("Invalid JSON file:", err);
+      showToast("Error!", `Could not import file: "${err}"`, "red");
     } finally {
       event.target.value = "";
     }
