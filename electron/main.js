@@ -18,6 +18,9 @@ function createMainWindow() {
   mainWindow = new BrowserWindow({
     width: window_width,
     height: window_height,
+    webPreferences: {
+    partition: "persist:main",
+    },
   });
 
   if (app.isPackaged) {

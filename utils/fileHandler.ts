@@ -49,7 +49,6 @@ export async function readPastaFromFileObject(file: File): Promise<Pasta[]> {
 }
 
 export function mergePastaLists(newPasta: Pasta[]): Pasta[]  {
-  console.log("New Pasta: ", newPasta);
   const oldPasta = getStoredPasta();
   
   for (const update of newPasta) {
@@ -73,10 +72,10 @@ function getStoredPasta(): Pasta[] {
 }
 
 export function savePasta(newPasta: Pasta) {
-  const pastaObjects = getStoredPasta();
+  let pastaObjects = getStoredPasta();
 
   if (pastaObjects.length === 0) {
-    throw new Error("Could not fetch stored pasta objects");
+    pastaObjects = [];
   }
 
   let newPastaList;

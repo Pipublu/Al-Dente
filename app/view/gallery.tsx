@@ -51,8 +51,6 @@ export default function Gallery() {
 
   const loadPasta = async () => {
       try {
-        const stored = localStorage.getItem("pastaArray");
-        console.log("stored data: ", stored);
         const data = await fetchPasta();
         const sortedPasta = data.pasta.sort((a,b) => a.name.localeCompare(b.name));
         setPasta(sortedPasta);
