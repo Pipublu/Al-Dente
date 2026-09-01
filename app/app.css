@@ -178,7 +178,7 @@ form {
 }
 
 form >* {
-  margin: 1rem;
+  margin: 0.6rem;
 }
 
 form > input, form > textarea {
@@ -305,9 +305,48 @@ textarea {
   margin: 2rem;
 }
 
+.timer-box {
+  border-radius: 1rem;
+  min-width: fit-content;
+  height: auto;
+}
+
 .timer {
   font-size: 4rem;
   font-family: var(--title-font);
+}
+
+.modal {
+  position: fixed;
+  z-index: 9998;
+
+  border: 0.1rem solid var(--contrast);
+  border-radius: 1rem;
+  padding: 0.2rem;
+  max-width: 20rem;
+  max-height: 15rem;
+  background-color: var(--bright-bg);
+}
+
+.modal >* {
+  overflow: scroll;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.modal button {
+  border: 0.15rem solid var(--contrast);
+  background-color: var(--secondary-bg);
+}
+
+.modal button:hover {
+    border: 0.15rem solid var(--vibrant-blue);
 }
 
 .left-align {
@@ -387,13 +426,14 @@ button:disabled {
   h2 {
     font-size: 2em;
   }
+
+  .modal {
+    max-width: 100%;
+    max-height: fit-content;
+  }
 }
 
 @media only screen and (max-width: 550px) {
-  form >* {
-  margin: 0.6rem;
-  }
-
   .toast {
     max-width: 80%;
   }
@@ -443,6 +483,10 @@ button:disabled {
 }
 
 @media only screen and (min-height: 700px) {
+
+  form >* {
+  margin: 1rem;
+  }
 
   .v-spacer {
     display: flex;

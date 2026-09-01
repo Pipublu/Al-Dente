@@ -5,7 +5,7 @@ const toastColors: Record<string, string> = {
 }
 
 
-interface ToastPropts {
+interface ToastProps {
   bgColor?: string;
   message: string;
   title?: string;
@@ -14,7 +14,7 @@ interface ToastPropts {
 }
 
 
-export default function Toast({ bgColor, message, title, fontColor, fadeOut}: ToastPropts) {
+export default function Toast({ bgColor, message, title, fontColor, fadeOut}: ToastProps) {
   const resColor = bgColor?  toastColors[bgColor] : "white";
   const resFontColor = fontColor ?? "black";
 

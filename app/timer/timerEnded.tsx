@@ -13,7 +13,7 @@ export default function TimerEnded() {
 
   const startTimer = () => {
     console.log("Starting new timer, ", time, "s...");
-    navigate("/timer/running", { state: { time: time / 60} } )
+    navigate("/timer/running", { state: { time: time} } )
   }
 
   const handleOptionChange = (event: any) => {
@@ -41,7 +41,7 @@ export default function TimerEnded() {
       
     </div>
     <button className="menu-btn dark-btn" onClick={startTimer}>Start new timer</button>
-    <button className="menu-btn dark-btn" onClick={back}>Back</button>
+    <button className="menu-btn dark-btn" onClick={back}>Menu</button>
   </div>
   </>
 }

@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router";
-import { useState, useRef, type ChangeEvent} from "react";
-import type { PastaResponse } from "types/pasta";
-import { downloadJSON, fetchPasta, mergePastaLists, readPastaFromFileObject } from "utils/fileHandler";
+import { useRef, type ChangeEvent} from "react";
+import { downloadJSON, mergePastaLists, readPastaFromFileObject } from "utils/storageHandler";
 import { ArrowDownToLine, Plus, Undo2, Minus } from 'lucide-react';
 import { useToast } from "~/toast/toastContext";
 
@@ -76,7 +75,7 @@ export default function Settings() {
             style={{ display: 'none' }}
            />
         </button>
-        <label>Reset all pasta. This will unload all additional pasta files.</label>
+        <label>Remove all loaded files.</label>
         <button className="dark-btn centered" onClick={reset}>
           <Minus />
         </button>

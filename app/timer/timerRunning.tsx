@@ -1,16 +1,22 @@
 import { Play, Pause, Square} from 'lucide-react';
 import { useNavigate, useLocation } from "react-router";
 import { useState, useEffect } from "react";
+import { secondsToHMS } from 'utils/calculations';
 
 export default function StartTimer() {
   let navigate = useNavigate();
   const location = useLocation();
   const total_time = location.state?.time || 0; 
 
-  const [timeLeft, setTimeLeft] = useState(total_time * 60 * 1000);
+  // convert to ms for smoother run
+  const [timeLeft, setTimeLeft] = useState(total_time * 1000);
 
-  const seconds = Math.floor((timeLeft / 1000) % 60);
-  const minutes = Math.floor((timeLeft / 1000 / 60) % 60);
+  const time = secondsToHMS(Math.floor(timeLeft / 1000));
+
+  const hours = time.h;
+  const minutes = time.min;
+  const seconds = time.sec;
+  
 
   const [isRunning, setIsRunning] = useState(true);
 
@@ -38,10 +44,8 @@ export default function StartTimer() {
     <div className="centered vbox">
       <h2>Cooking...</h2>
 
-      <div className="circle fill">
-        <div className="circle circle-centre">
-          <p className="timer">{ minutes } : { seconds }</p>
-        </div>
+      <div className="centered timer-box fill">
+          <p className="timer">{hours > 0 ? hours + " : " : ""} { minutes } : { seconds }</p>
       </div>
       <Buttons 
         isRunning={isRunning}
@@ -68,13 +72,13 @@ function Buttons({ isRunning, onPause, onCancel }: ButtonsProps) {
           <Pause 
             onClick={onPause}
             className="icon"
-            color="red"
+            color="brown"
             size={48}/>
           ) : (
           <Play 
             onClick={onPause}
             className="icon"
-            color="red"
+            color="brown"
             size={48}/>
           )}
       </div>
@@ -83,7 +87,7 @@ function Buttons({ isRunning, onPause, onCancel }: ButtonsProps) {
       <Square 
         onClick={onCancel}
         className="icon"
-        color="red"
+        color="brown"
         size={48}/>
     </div>
   </>

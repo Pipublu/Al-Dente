@@ -112,6 +112,15 @@ function generateNewId(pastaList: Pasta[]): string {
   return "";
 }
 
+export function removePasta(id: string) {
+  const storedPasta = getStoredPasta();
+  if (storedPasta.length == 0) {
+    throw new Error("Could not find any stored pasta!");
+  }
+  const newList = storedPasta.filter(a => a.id !== id);
+  localStorage.setItem("pastaArray", JSON.stringify(newList));
+}
+
 function createFile(pastaList: Pasta[]) {
   const element = document.createElement("a");
   const jsonFile = new Blob([JSON.stringify(pastaList)], {type: 'application/json'});

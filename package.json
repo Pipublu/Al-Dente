@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "concurrently \"npm run dev\" \"wait-on http://localhost:5173/ && npm run start:electron\"",
+    "start": "concurrently --kill-others \"npm run dev\" \"wait-on http://localhost:5173/ && npm run start:electron\"" ,
     "build": "react-router build",
     "dev": "vite",
     "start:react": "react-router-serve ./build/server/index.js",

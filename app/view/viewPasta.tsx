@@ -1,15 +1,24 @@
 import { useNavigate, useLocation } from "react-router";
 import type { Pasta } from "types/pasta";
 import { secondsToHMS } from "utils/calculations";
+import { useToast } from "~/toast/toastContext";
 
 
 export default function ViewPasta() {
   let navigate = useNavigate();
   const location = useLocation();
   const pasta = location.state?.pastaItem;
+  const {showToast} = useToast();
+
+  if (!pasta) {
+    showToast("Error!", "Could not show pasta.", "red");
+    navigate("/gallery");
+    return null;
+  }
+
+  
 
   const time = secondsToHMS(pasta.cookTime);
-  console.log(time);
 
   const backToGallery = () => {
     console.log("To gallery...");

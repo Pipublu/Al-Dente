@@ -20,6 +20,7 @@ function createMainWindow() {
     height: window_height,
     webPreferences: {
     partition: "persist:main",
+    preload: path.join(__dirname, 'preload.js'),
     },
   });
 
@@ -36,6 +37,8 @@ function createMainWindow() {
     mainWindow = null;
   });
 }
+
+
 
 app.whenReady().then(createMainWindow);
 

@@ -4,8 +4,15 @@ export default function Menu() {
   let navigate = useNavigate();
 
   const exit = () => {
-    console.log("Exiting...");
- 
+    if (window.electron?.ipcRenderer) {
+    // Running in Electron
+      window.electron.ipcRenderer.send("close-app");
+    } else {
+      // Running in browser (dev mode)
+      console.log("Close app (browser mode)");
+      
+    }
+
   };
 
 

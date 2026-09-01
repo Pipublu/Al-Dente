@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
-import { fetchPasta } from "utils/fileHandler";
+import { fetchPasta } from "utils/storageHandler";
 import type { Pasta } from "types/pasta";
 import { secondsToHMS } from "utils/calculations";
 
