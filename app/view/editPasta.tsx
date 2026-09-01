@@ -1,8 +1,9 @@
 import { useNavigate, useLocation } from "react-router";
 import { useState} from "react";
-import { savePasta } from "utils/fileHandler";
+import { savePasta, removePasta } from "utils/storageHandler";
 import { secondsToHMS } from "utils/calculations";
 import { useToast } from "~/toast/toastContext";
+import Modal from "~/modal";
 
 
 export default function EditPasta() {
@@ -11,6 +12,7 @@ export default function EditPasta() {
   const pasta = location.state?.pasta ?? undefined;
 
   const { showToast } = useToast();
+  const [modalOpen, setModalOpen] = useState(false);
 
 
   const [title, setTitle] = useState(pasta?.name ?? "");
@@ -67,12 +69,58 @@ export default function EditPasta() {
     const time = hours * 60**2 + minutes * 60 + seconds;
     return time;
   }
+
+  const deletePasta = () => {
+    setModalOpen(false);
+
+    if (!pasta.id) {
+      return;
+    }
+
+    const pTitle = title;
+
+    try {
+      removePasta(pasta.id);
+      showToast("Success!", `Deleted pasta entry "${pTitle}".`, "green");
+      navigate("/gallery");
+    } catch (error) {
+      console.log("Could not delete pasta ", error);
+      showToast("Error!", `Could not delete "${pTitle}."`, "red");
+    }
+
+  }
+
+  const onDeletePasta = () => {
+    setModalOpen(true);
+  }
+
+  const closeModal = () => {
+    setModalOpen(false);
+    
+  }
   
 
 
   return <>
     <div className="centered vbox">
+      <div className="topbar">
+        <div></div>
+        <h2>{pasta? "Edit pasta" : "Create pasta"}</h2>
+        <button className="small-btn dark-btn" onClick={back}>Back</button>
+      </div>
+      {modalOpen &&
+        <Modal 
+        title="Delete pasta"
+        message="Do you want to delete pasta? This removes it from the gallery permanently."
+        onClose={closeModal}
+        onContinue={deletePasta}
+        />
+      }
+      
       <form>
+        <div className="left-align full-width">
+          <label>Title:</label> 
+        </div>
         <input type="text" id="title" placeholder="Title" className="form-input-large" value={title}
           onChange={(event) => {
             setTitle(event.target.value);
@@ -167,7 +215,9 @@ export default function EditPasta() {
         </div>
       </form>
       <div className="centered hbox">
-        <button className="dark-btn" onClick={back}>Back</button>
+        {pasta && (
+          <button className="dark-btn" onClick={onDeletePasta}>Delete</button>
+        )}
         <button className="dark-btn" onClick={save}>Save</button>
       </div>
     </div>
