@@ -1,7 +1,8 @@
 import { Play, Pause, Square} from 'lucide-react';
 import { useNavigate, useLocation } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { secondsToHMS } from 'utils/calculations';
+import { useSound } from 'utils/useSound';
 
 export default function StartTimer() {
   let navigate = useNavigate();
@@ -20,17 +21,30 @@ export default function StartTimer() {
 
   const [isRunning, setIsRunning] = useState(true);
 
+  const [timerEnded, setTimerEnded] = useState(false);
+
+  const { playSound, pauseSound } = useSound();
+
+
+  const endTimer = () => {
+    setTimerEnded(true);
+    playSound();
+  }
+
+  const toTimerEnded = () => {
+    pauseSound();
+    navigate("/timer/ended");
+  }
 
   useEffect(() => {
     if (!isRunning) return;
 
-     // time in millisecs
     const interval = setInterval(() => {
 
       setTimeLeft(prev => {
         if (prev <= 1000) {
           clearInterval(interval);
-          navigate("/timer/ended");
+          endTimer();
           return 0;
         }
         return prev - 1000;
@@ -47,11 +61,24 @@ export default function StartTimer() {
       <div className="centered timer-box fill">
           <p className="timer">{hours > 0 ? hours + " : " : ""} { minutes } : { seconds }</p>
       </div>
-      <Buttons 
-        isRunning={isRunning}
-        onPause={() => setIsRunning(prev => !prev)}
-        onCancel={() => navigate("/timer/ended")}
+      
+      { !timerEnded ? (
+
+      <div className='centered vbox'>
+        <Buttons 
+          isRunning={isRunning}
+          onPause={() => setIsRunning(prev => !prev)}
+          onCancel={() => navigate("/timer/ended")}
         />
+        <label className='padded bold'>Remember to turn up the volume!</label>
+      </div>
+      
+      )
+      : (
+        <div>
+          <button className="small-btn" onClick={toTimerEnded}>Stop</button>
+        </div>
+      )}
     </div>
   </>
 }
@@ -66,29 +93,32 @@ interface ButtonsProps {
 function Buttons({ isRunning, onPause, onCancel }: ButtonsProps) {
   return <>
     <div className="hbox">
-      <div>
+      <div className='timer-icon'>
         {
           isRunning ? ( 
           <Pause 
             onClick={onPause}
-            className="icon"
+            className="icon play-pause-icon"
             color="brown"
             size={48}/>
           ) : (
           <Play 
             onClick={onPause}
-            className="icon"
+            className="icon play-pause-icon"
             color="brown"
             size={48}/>
           )}
       </div>
-      
+
       <div className="spacer"></div>
-      <Square 
-        onClick={onCancel}
-        className="icon"
-        color="brown"
-        size={48}/>
+      <div className="timer-icon">
+          <Square 
+            onClick={onCancel}
+            className="icon"
+            color="brown"
+            size={48}/>
+      </div>
+      
     </div>
   </>
 }
