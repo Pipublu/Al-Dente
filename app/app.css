@@ -82,6 +82,10 @@ h3, p {
   font-size: larger;
 }
 
+.small-title {
+  font-size: 3rem;
+}
+
 .thumbnail {  
   background: linear-gradient(
     180deg,
@@ -175,7 +179,10 @@ h3, p {
 .grid >* {
   margin: 0.4rem;
 }
-
+.large-margin >* {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 .radio-toolbar {
   padding: 0.5rem;
 }
@@ -340,7 +347,11 @@ textarea {
 
 .fill {
   margin: 1rem;
-  background-color: var(--green);
+  background: linear-gradient(
+    180deg,
+    var(--green),
+    rgb(25, 160, 113)
+  );
   width: 13rem;
   height: 13rem;
 }
@@ -433,6 +444,7 @@ textarea {
   flex-direction: column;
 }
 
+
 .spacer {
   display: flex;
   width: 10rem;
@@ -463,8 +475,6 @@ button:disabled {
 }
 
 .timer-icon {
-  width: 48px;
-  height: 48px;
   display: grid;
   place-items: center;
 }
@@ -506,6 +516,11 @@ button:disabled {
   .modal {
     max-width: 100%;
     max-height: fit-content;
+  }
+
+  .menu-title {
+    margin-top: 4rem;
+    font-size: 4rem;
   }
 }
 

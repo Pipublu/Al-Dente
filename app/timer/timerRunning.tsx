@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router";
 import { useState, useEffect, useRef } from "react";
 import { secondsToHMS } from 'utils/calculations';
 import { useSound } from 'utils/useSound';
+import { Tooltip } from 'react-tooltip'
 
 export default function StartTimer() {
   let navigate = useNavigate();
@@ -55,8 +56,8 @@ export default function StartTimer() {
   }, [isRunning, navigate]);
 
   return <>
-    <div className="centered vbox">
-      <h2>Cooking...</h2>
+    <div className="centered vbox large-margin">
+      <h2 className='small-title'>Cooking...</h2>
 
       <div className="centered timer-box fill">
           <p className="timer">{hours > 0 ? hours + " : " : ""} { minutes } : { seconds }</p>
@@ -96,27 +97,40 @@ function Buttons({ isRunning, onPause, onCancel }: ButtonsProps) {
       <div className='timer-icon'>
         {
           isRunning ? ( 
-          <Pause 
-            onClick={onPause}
-            className="icon play-pause-icon"
-            color="brown"
-            size={48}/>
+          <div data-tooltip-id="pause-tooltip"
+          data-tooltip-content="Pause timer">
+            <Pause 
+              onClick={onPause}
+              className="icon play-pause-icon"
+              color="brown"
+              size={48}/
+              >
+            <Tooltip id="pause-tooltip" clickable />
+          </div>
           ) : (
-          <Play 
-            onClick={onPause}
-            className="icon play-pause-icon"
-            color="brown"
-            size={48}/>
+          <div data-tooltip-id="continue-tooltip"
+          data-tooltip-content="Continue timer">
+            <Play 
+              onClick={onPause}
+              className="icon play-pause-icon"
+              color="brown"
+              size={48}/>
+            <Tooltip id="continue-tooltip" clickable />
+          </div>
           )}
       </div>
 
       <div className="spacer"></div>
-      <div className="timer-icon">
+      <div className="timer-icon"
+          data-tooltip-id="cancel-tooltip"
+          data-tooltip-content="Cancel timer">
           <Square 
             onClick={onCancel}
             className="icon"
             color="brown"
             size={48}/>
+          <Tooltip id="cancel-tooltip" clickable />
+
       </div>
       
     </div>

@@ -21,7 +21,7 @@ export default function TimerEnded() {
   };
 
   return <>
-  <div className="centered vbox">
+  <div className="centered vbox large-margin">
     <h2>Enjoy!</h2>
     <p>Pasta should be done cooking! Do a taste test, the pasta should be slightly chewy. If not, cook for a bit longer!</p>
     <div className="radio-toolbar centered">
