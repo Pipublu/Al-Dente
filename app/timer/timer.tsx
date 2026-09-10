@@ -22,8 +22,8 @@ export default function Timer() {
     <div className="centered vbox">
       <h2>Ready to cook some { pasta_name }?</h2>
       <h3>Cooktime: { total_time * 60 } minutes</h3>
-      <button className="menu-btn dark-btn" onClick={start}> Start timer </button>
-      <button className="menu-btn dark-btn" onClick={back}> Back </button>
+      <button className="menu-btn" onClick={start}> Start timer </button>
+      <button className="menu-btn" onClick={back}> Back </button>
     </div>
   </>
 }

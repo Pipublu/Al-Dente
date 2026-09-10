@@ -22,7 +22,6 @@ export default function TimerEnded() {
 
   return <>
   <div className="centered vbox">
-
     <h2>Enjoy!</h2>
     <p>Pasta should be done cooking! Do a taste test, the pasta should be slightly chewy. If not, cook for a bit longer!</p>
     <div className="radio-toolbar centered">
@@ -40,8 +39,8 @@ export default function TimerEnded() {
       </div>
       
     </div>
-    <button className="menu-btn dark-btn" onClick={startTimer}>Start new timer</button>
-    <button className="menu-btn dark-btn" onClick={back}>Menu</button>
+    <button className="menu-btn" onClick={startTimer}>Start new timer</button>
+    <button className="menu-btn" onClick={back}>Menu</button>
   </div>
   </>
 }

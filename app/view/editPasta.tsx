@@ -4,6 +4,8 @@ import { savePasta, removePasta } from "utils/storageHandler";
 import { secondsToHMS } from "utils/calculations";
 import { useToast } from "~/toast/toastContext";
 import Modal from "~/modal";
+import { Undo2, Save } from 'lucide-react';
+
 
 
 export default function EditPasta() {
@@ -104,9 +106,13 @@ export default function EditPasta() {
   return <>
     <div className="centered vbox">
       <div className="topbar">
-        <div></div>
+        <button className="centered small-btn" onClick={back}>
+          <Undo2 />
+        </button>
         <h2>{pasta? "Edit pasta" : "Create pasta"}</h2>
-        <button className="small-btn dark-btn" onClick={back}>Back</button>
+        <button className="centered small-btn" onClick={save}>
+          <Save />
+        </button>
       </div>
       {modalOpen &&
         <Modal 
@@ -116,7 +122,6 @@ export default function EditPasta() {
         onContinue={deletePasta}
         />
       }
-      
       <form>
         <div className="left-align full-width">
           <label>Title:</label> 
@@ -211,14 +216,13 @@ export default function EditPasta() {
               setSeconds(value);
             }}
           />
-          </div>
+        </div>
         </div>
       </form>
       <div className="centered hbox">
         {pasta && (
-          <button className="dark-btn" onClick={onDeletePasta}>Delete</button>
+          <button className="medium-btn" onClick={onDeletePasta}>Delete</button>
         )}
-        <button className="dark-btn" onClick={save}>Save</button>
       </div>
     </div>
   </>

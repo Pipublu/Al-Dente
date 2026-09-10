@@ -1,23 +1,112 @@
 {
   "pasta": [
-    { 
-      "id" : "03120",
-      "name" : "Lasagna",
+    {
+      "id": "03120",
+      "name": "Lasagna",
       "cookTime": 1500,
-      "description" : "Simple lasagna often topped with cheese. Oven baked pasta dish filled with layers of pasta plates, sauces and fillings of choice."
+      "description": "Simple lasagna often topped with cheese. Oven baked pasta dish filled with layers of pasta plates, sauces and fillings of choice."
     },
     {
-      "id" : "24o3-234243",
-      "name" : "Macaroni",
+      "id": "24o3-234243",
+      "name": "Macaroni",
       "cookTime": 600,
-      "description" : "Tiny bent tubes of pasta. Good four soups and thinner sauces. Usually cookes pretty fast."
+      "description": "Tiny bent tubes of pasta. Good four soups and thinner sauces. Usually cookes pretty fast."
     },
     {
-      "id" : "3",
-      "name" : "Fettuccine",
+      "id": "3",
+      "name": "Fettuccine",
       "cookTime": 210,
-      "description" : "Thin flat pasta. Good with sauce, simple and good for any dinner."
+      "description": "Thin flat pasta. Good with sauce, simple and good for any dinner."
+    },
+    {
+      "id": "4",
+      "name": "Spaghetti",
+      "cookTime": 540,
+      "description": "Long thin strands of pasta. A classic choice that works well with tomato sauces, meat sauces and simple oil based sauces."
+    },
+    {
+      "id": "5",
+      "name": "Penne",
+      "cookTime": 660,
+      "description": "Short hollow tubes with angled ends. Works well with thick sauces because the sauce can get trapped inside the pasta."
+    },
+    {
+      "id": "6",
+      "name": "Fusilli",
+      "cookTime": 600,
+      "description": "Short spiral shaped pasta. The twists hold onto sauces well and make it a good choice for pasta salads and creamy sauces."
+    },
+    {
+      "id": "7",
+      "name": "Ravioli",
+      "cookTime": 480,
+      "description": "Small pieces of filled pasta. Common fillings include cheese, meat, spinach and vegetables. Usually served with a simple sauce."
+    },
+    {
+      "id": "8",
+      "name": "Tagliatelle",
+      "cookTime": 420,
+      "description": "Long flat ribbons of pasta. Similar to fettuccine and especially good with rich meat sauces and creamy sauces."
+    },
+    {
+      "id": "9",
+      "name": "Linguine",
+      "cookTime": 480,
+      "description": "Long and slightly flattened strands of pasta. Often served with seafood, pesto or lighter cream and tomato sauces."
+    },
+    {
+      "id": "10",
+      "name": "Rigatoni",
+      "cookTime": 720,
+      "description": "Large ridged tubes of pasta. The ridges and wide shape make it good for thick sauces, baked pasta dishes and hearty meals."
+    },
+    {
+      "id": "11",
+      "name": "Orzo",
+      "cookTime": 540,
+      "description": "Small rice shaped pasta. Often used in soups, salads and one pot dishes, but can also be served with vegetables and sauces."
+    },
+    {
+      "id": "12",
+      "name": "Pappardelle",
+      "cookTime": 480,
+      "description": "Very wide flat ribbons of pasta. Its large surface works especially well with rich and hearty sauces such as ragù."
+    },
+    {
+      "id": "13",
+      "name": "Farfalle",
+      "cookTime": 660,
+      "description": "Bow tie shaped pasta with a pinched center. Works well in pasta salads and with light tomato, cream or vegetable sauces."
+    },
+    {
+      "id": "14",
+      "name": "Tortellini",
+      "cookTime": 420,
+      "description": "Small ring shaped filled pasta. Often filled with cheese or meat and served with a simple sauce, broth or pesto."
+    },
+    {
+      "id": "15",
+      "name": "Cannelloni",
+      "cookTime": 1500,
+      "description": "Large tubes of pasta traditionally filled with meat, cheese or vegetables and baked in tomato or cream sauce."
+    },
+    {
+      "id": "16",
+      "name": "Conchiglie",
+      "cookTime": 600,
+      "description": "Shell shaped pasta that can hold sauce inside its curved shape. Good with chunky tomato sauces, cheese sauces and vegetables."
+    },
+    {
+      "id": "17",
+      "name": "Angel Hair",
+      "cookTime": 180,
+      "description": "Very thin long strands of pasta. Cooks quickly and works best with light sauces, olive oil, fresh tomatoes and delicate ingredients."
+    },
+    {
+      "id": "18",
+      "name": "Gnocchi",
+      "cookTime": 180,
+      "description": "Small soft dumplings traditionally made with potatoes and flour. Good with creamy sauces, pesto, tomato sauce or browned butter."
     }
-    
   ]
 }

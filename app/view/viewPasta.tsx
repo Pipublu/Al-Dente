@@ -2,6 +2,8 @@ import { useNavigate, useLocation } from "react-router";
 import type { Pasta } from "types/pasta";
 import { secondsToHMS } from "utils/calculations";
 import { useToast } from "~/toast/toastContext";
+import {  Undo2, SquarePen} from 'lucide-react';
+
 
 
 export default function ViewPasta() {
@@ -38,19 +40,22 @@ export default function ViewPasta() {
   return <>
     <div className="centered tight vbox">
       <div className="topbar">
-        <div></div>
+        <button className="centered small-btn" onClick={backToGallery}>
+          <Undo2 />
+        </button>
         <h2>{pasta.name}</h2>
-        <button className="small-btn dark-btn" onClick={toEditPasta}>Edit</button>
+        <button className="centered small-btn" onClick={toEditPasta}>
+          <SquarePen />
+        </button>
       </div>
-      <div className="left-align tight vbox">
+      <div className="left-align vbox">
         <p className="left-align description">{pasta.description}</p>
         <p className="left-align">
           Cook time: {time.h > 0 ? time.h + " h " : ""} {time.min > 0 ? time.min + " min " : ""} {time.sec > 0 ? time.sec + " sec" : ""}
         </p>
       </div>
       <p className="large-text">{time.h > 0 ? time.h + " h " : ""} {time.min > 0 ? time.min + " min " : ""} {time.sec > 0 ? time.sec + " sec" : ""}</p>
-      <button className="menu-btn dark-btn" onClick={setTimer}>Start timer</button>
-      <button className="menu-btn dark-btn" onClick={backToGallery}>Back</button>
+      <button className="menu-btn" onClick={setTimer}>Start timer</button>
     </div>
   
   </>

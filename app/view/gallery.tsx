@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { fetchPasta } from "utils/storageHandler";
 import type { Pasta } from "types/pasta";
 import { secondsToHMS } from "utils/calculations";
+import { ArrowDownToLine, Plus, Undo2, Minus } from 'lucide-react';
+
 
 
 export default function Gallery() {
@@ -77,9 +79,13 @@ export default function Gallery() {
   return <>
     <div className="centered tight vbox">
       <div className="topbar">
-        <button className="small-btn dark-btn" onClick={back}>Back</button>
+        <button className="centered small-btn" onClick={back}>
+          <Undo2 />
+        </button>
         <h2>Choose pasta</h2>
-        <button className="small-btn dark-btn" onClick={addPasta}>Add</button>
+        <button className="centered small-btn" onClick={addPasta}>
+          <Plus />
+        </button>
       </div>
       <div className="grid grid-gallery">
         {currentItems.map((p) => (
@@ -122,7 +128,7 @@ interface NavigatorProps {
 function Navigator({ currentPage, totalPages, onPageChange } : NavigatorProps) {
 
   return<>
-  <div className="centered">
+  <div className="centered bottom-bar">
     <button 
       disabled={currentPage === 1}
       className="pagination-btn"

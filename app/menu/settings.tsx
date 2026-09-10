@@ -64,7 +64,7 @@ export default function Settings() {
       <div className="v-spacer"></div>
       <div className="grid-2col left-align">
         <label>Import pasta from .JSON.</label>
-        <button className="dark-btn centered" onClick={() => fileInput.current?.click()}>
+        <button className="centered" onClick={() => fileInput.current?.click()}>
           <Plus />
           <input 
             type='file'
@@ -76,16 +76,15 @@ export default function Settings() {
            />
         </button>
         <label>Remove all loaded files.</label>
-        <button className="dark-btn centered" onClick={reset}>
+        <button className="centered" onClick={reset}>
           <Minus />
         </button>
         <label>Download current pasta as .JSON.</label>
-        <button className="dark-btn centered" onClick={download}>
+        <button className="centered" onClick={download}>
           <ArrowDownToLine />
         </button>
       </div>
-      <button className="menu-btn dark-btn centered" onClick={back}>
-        <Undo2 />
+      <button className="menu-btn centered" onClick={back}>
         Back
       </button>
 

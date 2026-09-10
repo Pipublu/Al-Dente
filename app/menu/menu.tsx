@@ -26,12 +26,13 @@ export default function Menu() {
 
   return <>
     <div className="centered vbox">
-      <h1 className="title">Al Dente</h1>
+      <h1 className="menu-title">Al Dente</h1>
+
       <div className="vbox">
         <div className="v-spacer"></div>
-        <button className="menu-btn dark-btn" onClick={view}>Start cooking</button>
-        <button className="menu-btn dark-btn" onClick={settings}>Manage pasta</button>
-        <button className="menu-btn dark-btn" onClick={exit}>Quit</button>
+        <button className="menu-btn" onClick={view}>Start cooking</button>
+        <button className="menu-btn" onClick={settings}>Manage pasta</button>
+        <button className="menu-btn" onClick={exit}>Quit</button>
       </div>
     </div>
   </>
