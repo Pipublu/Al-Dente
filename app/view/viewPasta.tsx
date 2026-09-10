@@ -1,10 +1,8 @@
 import { useNavigate, useLocation } from "react-router";
-import type { Pasta } from "types/pasta";
 import { secondsToHMS } from "utils/calculations";
 import { useToast } from "~/toast/toastContext";
 import {  Undo2, SquarePen} from 'lucide-react';
-
-
+import { Tooltip } from 'react-tooltip'
 
 export default function ViewPasta() {
   let navigate = useNavigate();
@@ -40,12 +38,18 @@ export default function ViewPasta() {
   return <>
     <div className="centered tight vbox">
       <div className="topbar">
-        <button className="centered small-btn" onClick={backToGallery}>
+        <button className="centered small-btn" onClick={backToGallery}
+          data-tooltip-id="back-tooltip"
+          data-tooltip-content="Back">
           <Undo2 />
+          <Tooltip id="back-tooltip" clickable />
         </button>
         <h2>{pasta.name}</h2>
-        <button className="centered small-btn" onClick={toEditPasta}>
+        <button className="centered small-btn" onClick={toEditPasta}
+          data-tooltip-id="edit-tooltip"
+          data-tooltip-content="Edit">
           <SquarePen />
+          <Tooltip id="edit-tooltip" clickable />
         </button>
       </div>
       <div className="left-align vbox">

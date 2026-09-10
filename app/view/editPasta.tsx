@@ -5,8 +5,7 @@ import { secondsToHMS } from "utils/calculations";
 import { useToast } from "~/toast/toastContext";
 import Modal from "~/modal";
 import { Undo2, Save } from 'lucide-react';
-
-
+import { Tooltip } from 'react-tooltip'
 
 export default function EditPasta() {
   let navigate = useNavigate();
@@ -106,12 +105,18 @@ export default function EditPasta() {
   return <>
     <div className="centered vbox">
       <div className="topbar">
-        <button className="centered small-btn" onClick={back}>
+        <button className="centered small-btn" onClick={back}
+          data-tooltip-id="back-tooltip"
+          data-tooltip-content="Back">
           <Undo2 />
+          <Tooltip id="back-tooltip" clickable />
         </button>
         <h2>{pasta? "Edit pasta" : "Create pasta"}</h2>
-        <button className="centered small-btn" onClick={save}>
+        <button className="centered small-btn" onClick={save}
+          data-tooltip-id="save-tooltip"
+          data-tooltip-content="Save">
           <Save />
+          <Tooltip id="save-tooltip" clickable />
         </button>
       </div>
       {modalOpen &&

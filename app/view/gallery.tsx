@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import { fetchPasta } from "utils/storageHandler";
 import type { Pasta } from "types/pasta";
 import { secondsToHMS } from "utils/calculations";
-import { ArrowDownToLine, Plus, Undo2, Minus } from 'lucide-react';
-
-
+import { Plus, Undo2 } from 'lucide-react';
+import { Tooltip } from 'react-tooltip'
 
 export default function Gallery() {
   let navigate = useNavigate();
@@ -79,12 +78,18 @@ export default function Gallery() {
   return <>
     <div className="centered tight vbox">
       <div className="topbar">
-        <button className="centered small-btn" onClick={back}>
+        <button className="centered small-btn" onClick={back}
+          data-tooltip-id="back-tooltip"
+          data-tooltip-content="Back">
           <Undo2 />
+          <Tooltip id="back-tooltip" clickable />
         </button>
         <h2>Choose pasta</h2>
-        <button className="centered small-btn" onClick={addPasta}>
+        <button className="centered small-btn" onClick={addPasta}
+          data-tooltip-id="create-tooltip"
+          data-tooltip-content="Create new">
           <Plus />
+          <Tooltip id="create-tooltip" clickable />
         </button>
       </div>
       <div className="grid grid-gallery">
