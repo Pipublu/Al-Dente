@@ -52,7 +52,7 @@ export default function ViewPasta() {
           <Tooltip id="edit-tooltip" clickable />
         </button>
       </div>
-      <div className="left-align vbox">
+      <div className="left-align vbox medium-width">
         <p className="left-align description">{pasta.description}</p>
         <p className="left-align">
           Cook time: {time.h > 0 ? time.h + " h " : ""} {time.min > 0 ? time.min + " min " : ""} {time.sec > 0 ? time.sec + " sec" : ""}
