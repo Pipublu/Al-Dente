@@ -3,16 +3,22 @@ import { useState, useEffect } from "react";
 import { fetchPasta } from "utils/storageHandler";
 import type { Pasta } from "types/pasta";
 import { secondsToHMS } from "utils/calculations";
-import { Plus, Undo2 } from 'lucide-react';
+import { Plus, Undo2, Ellipsis } from 'lucide-react';
 import { Tooltip } from 'react-tooltip'
+
+type PageItem = number | "...";
+
 
 export default function Gallery() {
   let navigate = useNavigate();
 
   const getPageSize = () => {
-  if (window.innerWidth < 455) return 4;
-  if (window.innerWidth < 600) return 6;
-  return 8;
+  if (window.innerWidth < 455 && window.innerHeight < 765) return 4;
+  if (window.innerWidth < 600 && window.innerHeight < 765) return 6;
+  if (window.innerWidth >= 600 && window.innerHeight < 765) return 8;
+  if (window.innerWidth < 455) return 6;
+  if (window.innerWidth < 600) return 9;
+  return 12;
   };
 
   let page_size = getPageSize();
@@ -23,6 +29,22 @@ export default function Gallery() {
   const startIndex = (currentPage - 1) * page_size;
   const endIndex = startIndex + page_size;
   const currentItems = pastaArray.slice(startIndex, endIndex);
+
+  function getPageItems(currentPage: number, totalPages: number): PageItem[] {
+    if (totalPages <= 4) {
+      return Array.from({ length: totalPages }, (_, index) => index + 1);
+    }
+
+    if (currentPage <= 2) {
+      return [1, 2, "...", totalPages];
+    }
+
+    if (currentPage >= totalPages - 1) {
+      return [1, "...", totalPages - 1, totalPages];
+    }
+
+    return [1, "...", currentPage, "...", totalPages];
+  }
 
   const back = () => {
     console.log("Leaving gallery..");
@@ -101,6 +123,7 @@ export default function Gallery() {
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setPage}
+        getPageItems={getPageItems}
        />
 
     </div>
@@ -128,9 +151,12 @@ interface NavigatorProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (pageNumber: number) => void;
+  getPageItems: (currentPage: number, totalPages: number) => PageItem[];
 }
 
-function Navigator({ currentPage, totalPages, onPageChange } : NavigatorProps) {
+function Navigator({ currentPage, totalPages, onPageChange, getPageItems } : NavigatorProps) {
+
+  type PageItem = number | "...";
 
   return<>
   <div className="centered bottom-bar">
@@ -139,18 +165,25 @@ function Navigator({ currentPage, totalPages, onPageChange } : NavigatorProps) {
       className="pagination-btn"
       onClick={() => onPageChange(currentPage - 1)}
     > &lt; </button>
-      {
-        Array.from({ length: totalPages}, (_, i) => {
-          return(
-            <button 
-            key={i + 1}
-            onClick={() => onPageChange(i + 1)}
-            className={(i + 1) === currentPage ? "pagination-active-btn pagination-btn" : "pagination-btn"}
-            >
-              {i + 1}
-            </button>)
-      })
-      }
+      {getPageItems(currentPage, totalPages).map((item, index:number) =>
+      item === "..." ? (
+        <Ellipsis />
+      ) : (
+        <button
+          key={item}
+          onClick={() => onPageChange(item)}
+          className={
+            item === currentPage
+              ? "pagination-active-btn pagination-btn"
+              : "pagination-btn"
+          }
+          aria-current={item === currentPage ? "page" : undefined}
+          disabled={item === currentPage}
+        >
+          {item}
+        </button>
+      )
+    )}
     <button 
       disabled={currentPage === totalPages}
       className="pagination-btn"
