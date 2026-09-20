@@ -21,17 +21,14 @@ export default function ViewPasta() {
   const time = secondsToHMS(pasta.cookTime);
 
   const backToGallery = () => {
-    console.log("To gallery...");
     navigate("/gallery");
   };
 
   const setTimer = () => {
-    console.log("To set timer for ", pasta.cookTime);
     navigate("/timer/running", { state: { time: pasta.cookTime} });
   };
 
   const toEditPasta = () => {
-    console.log("To edit pasta...");
     navigate("/edit", { state: { pasta: pasta } });
   }
 

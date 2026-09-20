@@ -10,7 +10,6 @@ export default function Menu() {
     } else {
       // Running in browser (dev mode)
       console.log("Close app (browser mode)");
-      
     }
 
   };

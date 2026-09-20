@@ -31,7 +31,6 @@ export default function EditPasta() {
 
 
   const back = () => {
-    console.log("Leaving gallery..");
     navigate("/gallery");
   };
   

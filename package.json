@@ -1,33 +1,73 @@
 {
-  "name": "",
+  "name": "al-dente",
   "private": true,
   "type": "module",
+  "version":"1.0.0",
+  "author": "Pipublu",
+  "description": "Al-Dente desktop application for cooking pasta",
+  "main": "electron/main.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run dev\" \"wait-on http://localhost:5173/ && npm run start:electron\"",
     "build": "react-router build",
     "dev": "vite",
-    "start:react": "react-router-serve ./build/server/index.js",
     "start:electron": "electron electron/main.js",
-    "typecheck": "react-router typegen && tsc"
+    "typecheck": "react-router typegen && tsc",
+    "package": "npm run build && electron-builder --mac --win"
+  },
+  "build": {
+    "appId": "com.aldente.app",
+    "productName": "Al-Dente",
+    "files": [
+      "electron/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "build/client",
+        "to": "build/client"
+      }
+    ],
+    "mac": {
+      "icon": "build/client/icon_macOS.png",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "icon": "build/client/icon_win.png",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }]
+    }
   },
   "dependencies": {
-    "@react-router/node": "7.12.0",
-    "@react-router/serve": "7.12.0",
+    "@react-router/node": "7.18.4",
+    "@react-router/serve": "7.18.4",
     "isbot": "^5.1.31",
     "lucide-react": "^0.563.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "react-router": "7.12.0",
+    "react-router": "7.18.4",
     "react-tooltip": "^6.0.8"
   },
   "devDependencies": {
-    "@react-router/dev": "7.12.0",
+    "@react-router/dev": "7.18.4",
     "@tailwindcss/vite": "^4.1.13",
     "@types/node": "^22",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "concurrently": "^9.2.1",
-    "electron": "^40.1.0",
+    "electron": "^44.4.3",
+    "electron-builder": "^26.15.3",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",
     "vite": "^7.1.7",

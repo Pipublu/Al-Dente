@@ -47,12 +47,10 @@ export default function Gallery() {
   }
 
   const back = () => {
-    console.log("Leaving gallery..");
     navigate("/");
   };
 
   const addPasta = () => {
-    console.log("Leaving gallery..");
     navigate("/edit");
   };
 
@@ -62,7 +60,6 @@ export default function Gallery() {
   };
 
   const viewPasta = (id: string) => {
-    console.log("Viewing pasta with id: ", id);
     const pasta = pastaArray.find((p) => p.id === id);
 
     if (!pasta) {
