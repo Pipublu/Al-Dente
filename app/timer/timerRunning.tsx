@@ -1,6 +1,6 @@
 import { Play, Pause, Square} from 'lucide-react';
 import { useNavigate, useLocation } from "react-router";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { secondsToHMS } from 'utils/calculations';
 import { useSound } from 'utils/useSound';
 import { Tooltip } from 'react-tooltip'

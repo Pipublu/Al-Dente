@@ -1,6 +1,6 @@
-import { useRef, useEffect } from "react";
-
-const SOUND = "../public/BEEPTimer_Digital watch alarm (ID 2256)_BigSoundBank.com.wav"
+import { useRef } from "react";
+import SOUND from "public/sounds/BEEPTimer_Digital watch alarm (ID 2256)_BigSoundBank.com.wav";
+//const SOUND = "../public/BEEPTimer_Digital watch alarm (ID 2256)_BigSoundBank.com.wav"
 
 //https://pixabay.com/sound-effects/film-special-effects-digital-alarm-clock-151927/
 
@@ -13,7 +13,9 @@ export const useSound = () => {
         soundRef.current.loop = true;
     }
 
-    soundRef.current.play();
+    void soundRef.current.play().catch((error) => {
+      console.error("Unable to play timer sound:", error);
+    });
 };
 
   const pauseSound = () => {

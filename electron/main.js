@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, protocol, session} from "electron";
+import { app, BrowserWindow, ipcMain, protocol, session, Menu} from "electron";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
 
@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 let mainWindow;
 
 function createMainWindow() {
+  
   let window_width = 500;
   let window_height = 600;
 
@@ -36,15 +37,24 @@ function createMainWindow() {
   }
 );
 
-  
-
   if (app.isPackaged) {
     mainWindow.loadURL("app://localhost/");
-  } else {
+  } 
+  else if (process.argv.includes("--prod")) {
+    console.log(
+      "Production path:",
+      path.join(__dirname, "../build/client/index.html")
+    );    mainWindow.loadFile(
+        path.join(__dirname, "../build/client/index.html")
+    );
+  }
+  else {
     // In dev open the Vite dev server and DevTools
     mainWindow.loadURL("http://localhost:5173");
     mainWindow.webContents.openDevTools();
   }
+
+  Menu.setApplicationMenu(null);
 
   mainWindow.on('closed', () => {
     mainWindow = null;

@@ -8,11 +8,15 @@
   "main": "electron/main.js",
   "scripts": {
     "start": "concurrently --kill-others \"npm run dev\" \"wait-on http://localhost:5173/ && npm run start:electron\"",
+    "start:prod": "npm run build && electron electron/main.js --prod",
     "build": "react-router build",
     "dev": "vite",
     "start:electron": "electron electron/main.js",
     "typecheck": "react-router typegen && tsc",
-    "package": "npm run build && electron-builder --mac --win"
+    "package": "npm run build && electron-builder --mac --win",
+    "package:win": "npm run build && electron-builder --win",
+    "package:mac": "npm run build && electron-builder --mac"
+    
   },
   "build": {
     "appId": "com.aldente.app",
