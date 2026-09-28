@@ -1,6 +1,7 @@
 import { app, BrowserWindow, ipcMain, protocol, session, Menu} from "electron";
 import path from "path";
 import { fileURLToPath, pathToFileURL } from "url";
+import fs from "fs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -72,12 +73,13 @@ protocol.registerSchemesAsPrivileged([
       corsEnabled: true,
     },
   },
+  
 ]);
 
 app.whenReady().then(() => {
   const ses = session.fromPartition("persist:main");
 
-  ses.protocol.handle("app", async (request) => {
+    ses.protocol.handle("app", async (request) => {
     const url = new URL(request.url);
 
     const relativePath =
@@ -91,6 +93,17 @@ app.whenReady().then(() => {
       "client",
       relativePath
     );
+
+    if (relativePath.endsWith(".wav")) {
+      const audio = await fs.promises.readFile(fullPath);
+
+      return new Response(audio, {
+        headers: {
+          "Content-Type": "audio/wav",
+          "Content-Length": String(audio.byteLength),
+        },
+      });
+    }
 
     return ses.fetch(pathToFileURL(fullPath).toString());
   });
